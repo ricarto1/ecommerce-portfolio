@@ -29,6 +29,7 @@ export default function Home({ products } : Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     <main>
+      <button> button </button>
       <ol>
       {products.map(product => {
         return <li key={product.id}>{product.title}</li>
