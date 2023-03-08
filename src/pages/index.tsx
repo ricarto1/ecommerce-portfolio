@@ -1,6 +1,9 @@
-import Head from 'next/head'
-import {Heading, Button, Box} from '@chakra-ui/react'
 import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head'
+
+import { Button } from '@chakra-ui/react'
+import { Header } from "@/components/header";
+import { TopBar } from "@/components/topbar";
 
 type Product = {
   id: number;
@@ -14,12 +17,12 @@ type Product = {
     rate: number;
   };
 }
- 
+
 type Props = {
   products: Product[]
 }
 
-export default function Home({ products } : Props) {
+export default function Home({ products }: Props) {
   return (
     <>
       <Head>
@@ -28,23 +31,25 @@ export default function Home({ products } : Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-    <main>
-      <button> button </button>
-      <ol>
-      {products.map(product => {
-        return <li key={product.id}>{product.title}</li>
-      })}
-      </ol>
-    </main>
+      <main>
+        <TopBar></TopBar>
+        <Header></Header>
+        <Button> Button </Button>
+        <ol>
+          {products.map(product => {
+            return <li key={product.id}>{product.title}</li>
+          })}
+        </ol>
+      </main>
     </>
   )
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const products  = await fetch('https://fakestoreapi.com/products')
-  .then(res=>res.json())
+  const products = await fetch('https://fakestoreapi.com/products')
+    .then(res => res.json())
 
-  return{
+  return {
     props: {
       products
     }
