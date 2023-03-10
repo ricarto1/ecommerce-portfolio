@@ -10,7 +10,7 @@ import { Advantagesection } from '@/components/advantagesection';
 
 import { Categories } from '@/models/categories';
 
-import { Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 
 
 type Product = {
@@ -52,6 +52,15 @@ export default function Home({ products, categories }: Props) {
           <Homeherocategories categories={categories}></Homeherocategories>
           <Advantagesection/>
         </Container>
+
+        <Box margin="32px auto" width="255px">
+          <AspectRatio position="relative" ratio="1" maxWidth="100%">
+          <Image src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" fill="true"/>
+          </AspectRatio>
+          <Text zIndex="1" position="relative"> women backpack</Text>
+          <Text> $ 38.00 </Text>
+
+        </Box>
 
         {/*<ol>  
           {products.map(product => {
