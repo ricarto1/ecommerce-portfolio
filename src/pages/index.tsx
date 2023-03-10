@@ -5,11 +5,13 @@ import Image from "next/image"
 import { Header } from "@/components/header";
 import { TopBar } from "@/components/topbar";
 import { Homeherocategories } from '@/components/homeherocategories';
+import { Advantageitem } from '@/components/advantageitem';
+import { Advantagesection } from '@/components/advantagesection';
 
 import { Categories } from '@/models/categories';
 
 import { Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
-import { Advantageitem } from '@/components/advantageitem';
+
 
 type Product = {
   id: number;
@@ -48,11 +50,7 @@ export default function Home({ products, categories }: Props) {
       <main>
         <Container size="lg">
           <Homeherocategories categories={categories}></Homeherocategories>
-          <Flex justifyContent="space-between" margin="32px 0">
-            <Advantageitem title="Free Shiping" content="On all UA order or order above $100" icon="/ico-truck.svg"/>
-            <Advantageitem title="30 days return" content="Simply return within 30 days for an exchange" icon="/ico-return.svg"/>
-            <Advantageitem title="Support 24/7" content="Contact us 24 hours a day, 7 days a week" icon="/ico-support.svg"/>
-          </Flex>
+          <Advantagesection/>
         </Container>
 
         {/*<ol>  
