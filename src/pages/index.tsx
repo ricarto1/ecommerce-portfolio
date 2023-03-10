@@ -7,6 +7,8 @@ import { Homeherocategories } from '@/components/homeherocategories';
 
 import { Categories } from '@/models/categories';
 
+import { Box, Container} from '@chakra-ui/react';
+
 type Product = {
   id: number;
   title: string;
@@ -35,11 +37,13 @@ export default function Home({ products, categories }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <TopBar></TopBar>
-        <Header></Header>
-
+        <TopBar/>
+        <Box marginBottom="32px">
+        <Header/>
+        </Box>
+        <Container size="lg">
         <Homeherocategories categories={categories}></Homeherocategories>
-
+        </Container>
         {/*<ol>  
           {products.map(product => {
             return <li key={product.id}>{product.title}</li>
