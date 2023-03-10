@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
+import Image from "next/image"
 
 import { Header } from "@/components/header";
 import { TopBar } from "@/components/topbar";
@@ -7,7 +8,8 @@ import { Homeherocategories } from '@/components/homeherocategories';
 
 import { Categories } from '@/models/categories';
 
-import { Box, Container} from '@chakra-ui/react';
+import { Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Advantageitem } from '@/components/advantageitem';
 
 type Product = {
   id: number;
@@ -27,6 +29,7 @@ type Props = {
   categories: Categories[]
 }
 
+
 export default function Home({ products, categories }: Props) {
   return (
     <>
@@ -36,14 +39,22 @@ export default function Home({ products, categories }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <TopBar />
+      <Box marginBottom="32px">
+        <Header />
+      </Box>
+
       <main>
-        <TopBar/>
-        <Box marginBottom="32px">
-        <Header/>
-        </Box>
         <Container size="lg">
-        <Homeherocategories categories={categories}></Homeherocategories>
+          <Homeherocategories categories={categories}></Homeherocategories>
+          <Flex justifyContent="space-between" margin="32px 0">
+            <Advantageitem title="Free Shiping" content="On all UA order or order above $100" icon="/ico-truck.svg"/>
+            <Advantageitem title="30 days return" content="Simply return within 30 days for an exchange" icon="/ico-return.svg"/>
+            <Advantageitem title="Support 24/7" content="Contact us 24 hours a day, 7 days a week" icon="/ico-support.svg"/>
+          </Flex>
         </Container>
+
         {/*<ol>  
           {products.map(product => {
             return <li key={product.id}>{product.title}</li>
