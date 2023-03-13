@@ -4,7 +4,9 @@ import { Box, Container, Flex } from '@chakra-ui/react'
 
 export function TopBar() {
   return (<Box bg='black' w='100%' p={2}  >
-    <Container as ={Flex} color='white' justifyContent={"space-between"} fontSize="xs" size="lg">
+    <Container as ={Flex} color='white' justifyContent={"space-between"} fontSize="xs" size={{
+      lg:"lg"
+    }}>
     <Flex gap="24px">
       <Flex as={Link} href="" alignItems="center" gap="8px"> <Image src="/ico-small-phone.svg" width="24" height="24" alt="" /> +38 (050) 12 34 567</Flex>
 

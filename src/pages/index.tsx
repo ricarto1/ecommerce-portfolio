@@ -48,14 +48,16 @@ export default function Home({ products, categories }: Props) {
       </Box>
 
       <main>
-        <Container size="lg">
+        <Container size={{
+      lg:"lg"
+    }}>
           <Homeherocategories categories={categories}></Homeherocategories>
-          <Advantagesection/>
+          <Advantagesection />
         </Container>
 
         <Box margin="32px auto" width="255px">
           <AspectRatio position="relative" ratio={1} maxWidth="100%">
-          <Image src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" fill={true} style= {{objectFit: "contain"}}/>
+            <Image src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" fill={true} style={{ objectFit: "contain" }} />
           </AspectRatio>
           <Text zIndex="1" position="relative"> women backpack</Text>
           <Text> $ 38.00 </Text>
