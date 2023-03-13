@@ -10,35 +10,35 @@ type Props = {
 }
 
 export function Homeherocategories({categories}: Props) {
-    return (<Grid templateColumns="540px 255px 255px" gap="30px" templateRows="200px 260px">
-      {categories.map((cat, key) => {
+    return (<Grid templateColumns={{
+      base:"1fr 1fr",
+      sm:"540px 255px 255px" 
+    }}  templateRows= {{
+      base:"130px 154px 130px",
+      sm:"200px 260px"
+    }} gap={{
+      base:"8px", 
+      sm:"30px" 
+    }} 
+      templateAreas={{
+      base:`
+       "cat1 cat1"
+       "cat2 cat3"
+       "cat4 cat4" 
+       `,
+       sm: `
+       "cat1 cat2 cat3"
+       "cat1 cat4 cat4"`
+    }}>
+      {categories.map((cat, index) => {
         const slug = slugify(cat);
         const imageUrl = `/pic-categories-${slug}.jpg`;
-
-        const gridItemsProp: GridItemProps = {
-          position: "relative",
-          w: "100%",
-          h: "100%"
-        };
   
-        if (key == 0) {
-            gridItemsProp.rowSpan = 2;
-        }
-  
-        if (key == categories.length - 1) {
-            gridItemsProp.colSpan = 2;
-        }
-  
-        {
-          /*if (key == 0) {
-          return <GridItem position="relative" w="100%" h="100%" rowSpan={2} key={key}><Image src={imageUrl} fill={true} alt="{cat}"/> <CenteredLabel>{cat}</CenteredLabel> </GridItem>
-          }
-          if (key== categories.length-1){
-          return <GridItem  position="relative" w="100%" h="100%" colSpan={2} key={key}><Image src={imageUrl} fill={true} alt="{cat}"/></GridItem>
-          }*/
-        }
-        return <GridItem {...gridItemsProp} key={key}><Image src={imageUrl} fill={true} alt={cat} /> <CenteredLabel> {cat}</CenteredLabel> </GridItem>;
+        return <GridItem fontSize={{
+          base:"13px",
+          sm:"18px"
+        }} position="relative" w="100%" h="100%" gridArea={`cat${index+1}`} key={index}><Image src={imageUrl} style={{objectFit: "cover"}} fill={true} alt={cat} /> <CenteredLabel> {cat}</CenteredLabel> </GridItem>;
       })}
     </Grid>);
-  }
+   }
   
