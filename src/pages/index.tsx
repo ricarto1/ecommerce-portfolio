@@ -10,10 +10,13 @@ import { Advantagesection } from '@/components/advantagesection';
 
 import { Categories } from '@/models/categories';
 
-import { AspectRatio, Box, Container, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Container, Flex, Grid, GridItem, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { Productcard } from '@/components/productcard';
 import { start } from 'repl';
+import { group } from 'console';
+import { GroupedProducts, groupProductsByCategory } from '@/util/groupProductsByCategory';
+import { Homeproductsgrid } from '@/components/homeproductsgrid';
 
 
 export type Product = {
@@ -31,10 +34,11 @@ export type Product = {
 
 type Props = {
   products: Product[],
-  categories: Categories[]
+  categories: Categories[],
+  productsGroupByCategory: GroupedProducts[],
 }
 
-export default function Home({ products, categories }: Props) {
+export default function Home({ products, categories, productsGroupByCategory }: Props) {
   return (
     <>
       <Head>
@@ -64,41 +68,26 @@ export default function Home({ products, categories }: Props) {
           md: "1110px"
         }}
           paddingX="0">
-          <Grid 
-          gridTemplateColumns={{
-            base: "repeat(auto-fit, 255px)",
-            md: "repeat(auto-fit, minmax(255px, 1fr))",
-          }}
-            gridAutoFlow={{
-              base: "column",
-              md: "row"
-            }}
-            alignItems="stretch"
-            overflowX="scroll"
-            gridAutoRows="1fr"
-            gridAutoColumns="255px"
-            scrollSnapType="x mandatory"
-            scrollSnapStop='always'
-            gap="30px">
-            {products.map((product, i) => {
-              return (
-                <Box
-                  marginLeft={{
-                    base: i == 0 ? "16px" : "0",
-                    md: "0"
-                  }}
-                  key={product.id}
-                  scrollSnapAlign="center"
-                  border={"solid 1px"}
-                  borderColor={"gray.200"}
-                  padding={"16px"}>
-                  <Productcard {...product} />
-                </Box>
-              );
-            })}
-          </Grid>
-        </Container>
 
+          {Object.entries(productsGroupByCategory).map(([category, products]) => {
+            return (
+              <Box key={category} marginBottom="64px">
+                <Heading as="h2" 
+                size="lg" 
+                textTransform="uppercase"
+                margin={{
+                  base:"0 0 16px 16px",
+                  md:"0 0 24px"
+
+                }}>
+                  {category}
+                </Heading>
+                <Homeproductsgrid products={products} />
+              </Box>
+            );
+          })
+          }
+        </Container>
       </main>
     </>
   )
@@ -110,10 +99,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const categories = await fetch('https://fakestoreapi.com/products/categories')
     .then(res => res.json())
 
+  const productsGroupByCategory = groupProductsByCategory(products);
+
   return {
     props: {
       products,
-      categories
+      categories,
+      productsGroupByCategory,
     }
   }
 }
