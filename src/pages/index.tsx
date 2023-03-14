@@ -18,6 +18,8 @@ import { group } from 'console';
 import { GroupedProducts, groupProductsByCategory } from '@/util/groupProductsByCategory';
 import { Homeproductsgrid } from '@/components/homeproductsgrid';
 
+import bannerNewSeason from "/public/banner-new-season.jpg";
+import bannerSale from "/public/banner-sale.jpg";
 
 export type Product = {
   id: number;
@@ -88,6 +90,16 @@ export default function Home({ products, categories, productsGroupByCategory }: 
           })
           }
         </Container>
+
+        <SimpleGrid
+        minChildWidth="255px"
+        spacing={{
+          base:"16px",
+          md:"32px"
+        }}>
+          <Image src={bannerNewSeason} alt=""></Image>
+          <Image src={bannerSale} alt=""></Image>
+        </SimpleGrid>
       </main>
     </>
   )
