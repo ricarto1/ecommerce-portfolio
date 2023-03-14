@@ -13,6 +13,7 @@ import { Categories } from '@/models/categories';
 import { AspectRatio, Box, Container, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { Productcard } from '@/components/productcard';
+import { start } from 'repl';
 
 
 export type Product = {
@@ -56,15 +57,48 @@ export default function Home({ products, categories }: Props) {
 
           <Advantagesection />
 
-          <SimpleGrid minChildWidth='255px' spacing='30px'>  
-          {products.map(product => {
-            return <Productcard {...product} key={product.id}/>
-          })}
-        </SimpleGrid>
-
         </Container>
 
-      
+        <Container maxW={{
+          base: "100%",
+          md: "1110px"
+        }}
+          paddingX="0">
+          <Grid 
+          gridTemplateColumns={{
+            base: "repeat(auto-fit, 255px)",
+            md: "repeat(auto-fit, minmax(255px, 1fr))",
+          }}
+            gridAutoFlow={{
+              base: "column",
+              md: "row"
+            }}
+            alignItems="stretch"
+            overflowX="scroll"
+            gridAutoRows="1fr"
+            gridAutoColumns="255px"
+            scrollSnapType="x mandatory"
+            scrollSnapStop='always'
+            gap="30px">
+            {products.map((product, i) => {
+              return (
+                <Box
+                  marginLeft={{
+                    base: i == 0 ? "16px" : "0",
+                    md: "0"
+                  }}
+                  key={product.id}
+                  scrollSnapAlign="center"
+                  border={"solid 1px"}
+                  borderColor={"gray.200"}
+                  padding={"16px"}>
+                  <Productcard {...product} />
+                </Box>
+              );
+            })}
+          </Grid>
+        </Container>
+
       </main>
     </>
   )
