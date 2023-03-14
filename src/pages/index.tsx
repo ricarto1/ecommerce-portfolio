@@ -10,10 +10,12 @@ import { Advantagesection } from '@/components/advantagesection';
 
 import { Categories } from '@/models/categories';
 
-import { AspectRatio, Box, Container, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Container, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import { Productcard } from '@/components/productcard';
 
 
-type Product = {
+export type Product = {
   id: number;
   title: string;
   price: number;
@@ -30,7 +32,6 @@ type Props = {
   products: Product[],
   categories: Categories[]
 }
-
 
 export default function Home({ products, categories }: Props) {
   return (
@@ -49,26 +50,21 @@ export default function Home({ products, categories }: Props) {
 
       <main>
         <Container size={{
-      lg:"lg"
-    }}>
+          lg: "lg"
+        }}>
           <Homeherocategories categories={categories}></Homeherocategories>
+
           <Advantagesection />
+
+          <SimpleGrid minChildWidth='255px' spacing='30px'>  
+          {products.map(product => {
+            return <Productcard {...product} key={product.id}/>
+          })}
+        </SimpleGrid>
+
         </Container>
 
-        <Box margin="32px auto" width="255px">
-          <AspectRatio position="relative" ratio={1} maxWidth="100%">
-            <Image src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="" fill={true} style={{ objectFit: "contain" }} />
-          </AspectRatio>
-          <Text zIndex="1" position="relative"> women backpack</Text>
-          <Text> $ 38.00 </Text>
-
-        </Box>
-
-        {/*<ol>  
-          {products.map(product => {
-            return <li key={product.id}>{product.title}</li>
-          })}
-        </ol>*/}
+      
       </main>
     </>
   )
