@@ -21,6 +21,7 @@ import { Homeproductsgrid } from '@/components/homeproductsgrid';
 import bannerNewSeason from "/public/banner-new-season.jpg";
 import bannerSale from "/public/banner-sale.jpg";
 import { CenteredLabel } from '@/components/centeredlabel';
+import { Promobanner } from '@/components/promobanner';
 
 export type Product = {
   id: number;
@@ -40,6 +41,10 @@ type Props = {
   categories: Categories[],
   productsGroupByCategory: GroupedProducts[],
 }
+
+
+
+
 
 export default function Home({ products, categories, productsGroupByCategory }: Props) {
   return (
@@ -102,26 +107,17 @@ export default function Home({ products, categories, productsGroupByCategory }: 
               md: "32px"
             }}>
 
-            <Box position={"relative"}>
-              <Image src={bannerNewSeason} alt=""></Image>
-              <Box position="absolute" left="50%" top="50%" transform="translate(-50%, -50%)">
-                <CenteredLabel>
-                  <Text fontSize="sm" color="gray.500">
-                    New season
-                  </Text>
-                  <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
-                    Lookbook collection
-                  </Text>
-                </CenteredLabel>
-              </Box>
-            </Box>
+            <Promobanner image={bannerNewSeason}>
+              <Text fontSize="sm" color="gray.500">
+                New season
+              </Text>
+              <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                Lookbook collection
+              </Text>
+            </Promobanner>
 
-
-            <Box position={"relative"}>
-              <Image src={bannerSale} alt=""></Image>
-              <Box position="absolute" left="50%" top="50%" transform="translate(-50%, -50%)">
-                <CenteredLabel>
-                  <Text fontSize="sm" color="gray.500">
+            <Promobanner image={bannerSale}>
+            <Text fontSize="sm" color="gray.500">
                     Sale
                   </Text>
                   <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
@@ -130,10 +126,7 @@ export default function Home({ products, categories, productsGroupByCategory }: 
                       50% off
                     </Text>
                   </Text>
-                </CenteredLabel>
-              </Box>
-            </Box>
-
+            </Promobanner>
             
           </SimpleGrid>
         </Container>
