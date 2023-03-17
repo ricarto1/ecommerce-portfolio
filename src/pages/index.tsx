@@ -20,6 +20,7 @@ import { Homeproductsgrid } from '@/components/homeproductsgrid';
 
 import bannerNewSeason from "/public/banner-new-season.jpg";
 import bannerSale from "/public/banner-sale.jpg";
+import { CenteredLabel } from '@/components/centeredlabel';
 
 export type Product = {
   id: number;
@@ -74,14 +75,14 @@ export default function Home({ products, categories, productsGroupByCategory }: 
           {Object.entries(productsGroupByCategory).map(([category, products]) => {
             return (
               <Box key={category} marginBottom="64px">
-                <Heading as="h2" 
-                size="lg" 
-                textTransform="uppercase"
-                margin={{
-                  base:"0 0 16px 16px",
-                  md:"0 0 24px"
+                <Heading as="h2"
+                  size="lg"
+                  textTransform="uppercase"
+                  margin={{
+                    base: "0 0 16px 16px",
+                    md: "0 0 24px"
 
-                }}>
+                  }}>
                   {category}
                 </Heading>
                 <Homeproductsgrid products={products} />
@@ -91,15 +92,51 @@ export default function Home({ products, categories, productsGroupByCategory }: 
           }
         </Container>
 
-        <SimpleGrid
-        minChildWidth="255px"
-        spacing={{
-          base:"16px",
-          md:"32px"
+        <Container size={{
+          lg: "lg"
         }}>
-          <Image src={bannerNewSeason} alt=""></Image>
-          <Image src={bannerSale} alt=""></Image>
-        </SimpleGrid>
+          <SimpleGrid
+            minChildWidth="255px"
+            spacing={{
+              base: "16px",
+              md: "32px"
+            }}>
+
+            <Box position={"relative"}>
+              <Image src={bannerNewSeason} alt=""></Image>
+              <Box position="absolute" left="50%" top="50%" transform="translate(-50%, -50%)">
+                <CenteredLabel>
+                  <Text fontSize="sm" color="gray.500">
+                    New season
+                  </Text>
+                  <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                    Lookbook collection
+                  </Text>
+                </CenteredLabel>
+              </Box>
+            </Box>
+
+
+            <Box position={"relative"}>
+              <Image src={bannerSale} alt=""></Image>
+              <Box position="absolute" left="50%" top="50%" transform="translate(-50%, -50%)">
+                <CenteredLabel>
+                  <Text fontSize="sm" color="gray.500">
+                    Sale
+                  </Text>
+                  <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                    Get up to {""}
+                    <Text as="span" color="red">
+                      50% off
+                    </Text>
+                  </Text>
+                </CenteredLabel>
+              </Box>
+            </Box>
+
+            
+          </SimpleGrid>
+        </Container>
       </main>
     </>
   )
