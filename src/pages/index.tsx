@@ -10,7 +10,7 @@ import { Advantagesection } from '@/components/advantagesection';
 
 import { Categories } from '@/models/categories';
 
-import { AspectRatio, Box, Container, Flex, Grid, GridItem, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Button, Container, Flex, FormControl, FormHelperText, FormLabel, Grid, GridItem, Heading, Input, SimpleGrid, Text } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { Productcard } from '@/components/productcard';
 import { start } from 'repl';
@@ -62,9 +62,7 @@ export default function Home({ products, categories, productsGroupByCategory }: 
       </Box>
 
       <main>
-        <Container size={{
-          lg: "lg"
-        }}>
+        <Container>
           <Homeherocategories categories={categories}></Homeherocategories>
 
           <Advantagesection />
@@ -97,9 +95,7 @@ export default function Home({ products, categories, productsGroupByCategory }: 
           }
         </Container>
 
-        <Container size={{
-          lg: "lg"
-        }}>
+        <Container>
           <SimpleGrid
             minChildWidth="255px"
             spacing={{
@@ -117,18 +113,36 @@ export default function Home({ products, categories, productsGroupByCategory }: 
             </Promobanner>
 
             <Promobanner image={bannerSale}>
-            <Text fontSize="sm" color="gray.500">
-                    Sale
-                  </Text>
-                  <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
-                    Get up to {""}
-                    <Text as="span" color="red">
-                      50% off
-                    </Text>
-                  </Text>
+              <Text fontSize="sm" color="gray.500">
+                Sale
+              </Text>
+              <Text fontSize="lg" fontWeight="bold" whiteSpace="nowrap">
+                Get up to {""}
+                <Text as="span" color="red">
+                  50% off
+                </Text>
+              </Text>
             </Promobanner>
-            
+
           </SimpleGrid>
+        </Container>
+
+        <Container background={"linear-gradient(180deg, #f3f2f2 0%, #dcdbdb 100%);"} margin="32px auto" padding="24px" maxW={"100%"}>
+          <Box maxW={"532px"} margin="auto" gap="32px" as="article" bgColor="white" padding="32px" > 
+          <Grid gap="32px" maxW="352px" margin="auto"  textAlign="center">
+            <header>
+            <Heading size="sm" textTransform="uppercase" color="gray">Special offer </Heading>
+            <Heading size="2xl" textTransform="uppercase">Subscribe and {" "} <Text as="span" color="red"> get 10% off</Text>
+            </Heading>
+            </header>
+            <Grid as="form" action="" gap="24px">
+              <FormControl>
+                <Input height="64px" textAlign="inherit" borderRadius="0" type='email' placeholder="Enter your email" backgroundColor="gray.100"/>
+              </FormControl>
+              <Button bgColor={"black"} width="100%" size="lg">Subscribe</Button>
+            </Grid>
+          </Grid>
+          </Box>
         </Container>
       </main>
     </>

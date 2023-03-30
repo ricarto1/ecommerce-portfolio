@@ -1,19 +1,11 @@
 import type { AppProps } from 'next/app'
 
-import { ChakraProvider,defineStyle } from '@chakra-ui/react'
+import { ChakraProvider,ComponentStyleConfig,defineStyle } from '@chakra-ui/react'
 
 import { extendTheme } from '@chakra-ui/react'
 
 import { defineStyleConfig } from '@chakra-ui/react'
 
-const sizes = {
-  lg: defineStyle({
-    maxW: '1110px',
-    p:0
-  }),
-}
-
-export const containerTheme = defineStyleConfig({ sizes })
 
 export const buttonTheme = defineStyleConfig({
   baseStyle: {
@@ -50,7 +42,12 @@ const theme = extendTheme({
   },
   components: {
     Button: buttonTheme,
-    Container: containerTheme
+    Container: {
+      baseStyle: {
+        maxW: '1142px',
+        p:0
+      }
+    }
   }
 })
 
